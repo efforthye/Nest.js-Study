@@ -62,6 +62,13 @@
 
 ## 3. 기본 CRUD 방법 (로컬 메모리)
 
+- 기본적인 제목과 내용이 포함된 공개/비공개 게시글 CRUD
+  ![Alt text](image-2.png)
+- Study를 하면서 NestJS 를 통하여 구현할 구조
+  ![Alt text](image-1.png)
+  - 게시글을 만드는 것이므로 `게시글에 관한 모듈`과 그 `게시글을 만드는 사람에 대한 인증 모듈`이 필요하여 크게 두 가지 모듈로 나누어 보았다.
+  - 또한, 각 모듈을 구성하는 Controller, Service, Repository 등이 있는데 이러한 경우 NestJS에서는 어떠한 용도로 사용되는지, BoardModule 안에는 BoardController, BoardEntity, BoardService, BoardRepository, ValidationPipe와 같은 부분이 있는데 각 부분은 어떤 기능을 수행하는지 등에 대하여 알아 볼 예정이다.
+
 ## 4. PostgreSQL & TypeORM
 
 ## 5. JWT 모듈을 통한 인증 처리
