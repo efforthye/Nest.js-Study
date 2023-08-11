@@ -6,13 +6,13 @@
 ### 목차
 
 1. [Nest.js의 기본 개념](#1-nestjs의-기본-개념)
-2. [Nest JS 설치 방법](#2-Nest-JS-시작하기)
-3. [기본 CRUD (로컬 메모리)](<#3-기본-CRUD-방법-(로컬-메모리)>)
-4. [PostgreSQL & TypeORM](#4-PostgreSQL-&-TypeORM)
-5. [JWT 모듈을 통한 인증 처리](#5-JWT-모듈을-통한-인증-처리)
-6. [JWT와 PASSPORT 모듈을 이용한 권한 처리](#6-JWT와-PASSPORT-모듈을-이용한-권한-처리)
+2. [Nest JS 설치 방법](#2-nest-js-시작하기)
+3. [기본 CRUD (로컬 메모리)](<#3-기본-crud-방법-(로컬-메모리)>)
+4. [PostgreSQL & TypeORM](#4-postgresql-&-typeorm)
+5. [JWT 모듈을 통한 인증 처리](#5-jwt-모듈을-통한-인증-처리)
+6. [JWT와 PASSPORT 모듈을 이용한 권한 처리](#6-jwt와-passport-모듈을-이용한-권한-처리)
 7. [어플리케이션 로그 남기기](#7-어플리케이션-로그-남기기)
-8. [AWS 등 클라우드 배포 시 설정](#8-AWS-등-클라우드-배포-시-설정)
+8. [AWS 등 클라우드 배포 시 설정](#8-aws-등-클라우드-배포-시-설정)
 
 ## 1. Nest.js의 기본 개념
 
