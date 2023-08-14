@@ -242,7 +242,7 @@ export class BoardsController {
 }
 ```
 
-- 위와 같은 처리가 완료되면, `npm run start:dev`로 서버를 실행하고 localhost:3000/boards 접근 시 해당 게시글 목록이 출력되게 된다.
+- 위와 같은 처리가 완료되면, `npm run start:dev`로 서버를 실행하고 http://localhost:3000/boards 접근 시 해당 게시글 목록이 출력되게 된다.
 
 ## 4. PostgreSQL & TypeORM
 
