@@ -45,7 +45,34 @@
   - 해당 아키텍처(플랫폼에 맞는 서비스의 설계)는 Angular에서 크게 영감을 받았다.
 - 보통 Express를 사용하면 테스팅 기능, 타입스크립트 설정, 로그 기능 등의 많은 설정을 덧붙여 줘야 하지만 Nest를 사용하면 굉장히 손쉽게 명령어를 가지고 해당 기능들을 활용할 수 있기 때문에 편리하다는 장점이 있다.
 
-  <br/><br/>
+### Nest JS의 Controller 란?
+
+![Alt text](image-5.png)
+
+- 컨트롤러는 들어오는 요청을 처리하고 클라이언트에 응답을 반환하는 역할을 하며, @Controler 테코레이터로 클래스를 데코레이션하여 정의된다.
+
+```
+@Controller('/boards')
+export class BoardsController{}
+```
+
+- 데코레이터의 인자로는 Controller에 의하여 처리될 라우터 경로를 지정하여 주면 된다.
+
+### Nest JS의 Handler 란?
+
+- 핸들러는 @Get, @Post, @Delete 등과 같이 데코레이터로 장식된 컨트롤러 클래스 내부의 단순한 메서드이다.
+
+```
+@Controller('/boards')
+export class BoardsController {
+  @Get()
+  getBoards(): string {
+    return 'This action returns all boards';
+  }
+}
+```
+
+<br/><br/>
 
 ## 2. Nest JS 시작하기
 
