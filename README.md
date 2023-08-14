@@ -47,7 +47,7 @@
 
 ### Nest JS의 Controller 란?
 
-![Alt text](image-5.png)
+![Alt text](images/image-5.png)
 
 - 컨트롤러는 들어오는 요청을 처리하고 클라이언트에 응답을 반환하는 역할을 하며, @Controler 테코레이터로 클래스를 데코레이션하여 정의된다.
 
@@ -107,7 +107,7 @@ export class BoardsController {
 
 ### 기본 구조에서 살펴보는 로직 흐름
 
-![Alt text](image-3.png)
+![Alt text](images/image-3.png)
 
 ### 실행 방법
 
@@ -126,7 +126,7 @@ export class BoardsController {
 
 ### 컨트롤러 생성 방법
 
-![Alt text](image-4.png)
+![Alt text](images/image-4.png)
 
 - boards 컨트롤러 생성 명령어(프로젝트 루트 경로) : `nest g controller boards --no-spec`
   - --no-spec : 테스트를 위한 소스 코드 생성을 하지 않겠다는 명령어이다.
@@ -137,9 +137,9 @@ export class BoardsController {
 ### CRUD 구현 예정 구조
 
 - 기본적인 제목과 내용이 포함된 공개/비공개 게시글 CRUD
-  ![Alt text](image-2.png)
+  ![Alt text](images/image-2.png)
 - Study를 하면서 NestJS 를 통하여 구현할 구조
-  ![Alt text](image-1.png)
+  ![Alt text](images/image-1.png)
   - 게시글을 만드는 것이므로 `게시글에 관한 모듈`과 그 `게시글을 만드는 사람에 대한 인증 모듈`이 필요하여 크게 두 가지 모듈로 나누었다.
   - 또한, 각 모듈을 구성하는 Controller, Service, Repository 등이 있는데 이러한 경우 NestJS에서는 어떠한 용도로 사용되는지, BoardModule 안에는 BoardController, BoardEntity, BoardService, BoardRepository, ValidationPipe와 같은 부분이 있는데 각 부분은 어떤 기능을 수행하는지 등에 대하여 알아 볼 예정이다.
     <br/><br/>
