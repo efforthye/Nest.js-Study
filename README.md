@@ -78,11 +78,24 @@
 - `src 폴더` : 대부분의 비즈니스 로직이 들어가는 폴더이다.
   - `main.ts` : 어플리케이션을 생성(AppModule)하고 실행하도록 시작점을 설정하는 파일이다.
 
+### 기본 구조에서 살펴보는 로직 흐름
+
+![Alt text](image-3.png)
+
 ### 실행 방법
 
 - 해당 NestJS 프로젝트 루트에서 `npm run start:dev` 명령어를 입력하여 실행하여 준다.
   - start:dev : package.json에 있는 개발 모드로 시작할 때의 스크립트이다.
 - 시작을 하게 되면 dist 폴더가 생성되고, LOG가 찍히면서 프로젝트가 잘 실행됨을 확인할 수 있다.
+
+### 모듈 생성방법
+
+- boards 모듈 생성 명령어(프로젝트 루트 경로) : `nest g module boards`
+  - nest : using nestcli
+  - g : generate
+  - module : schematic that i want to create
+  - boards : name of the schematic
+- 해당 명령어를 입력하면 src에 boards 폴더 및 boards 모듈이 생성된다.
 
 ## 3. 기본 CRUD 방법 (로컬 메모리)
 
