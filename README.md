@@ -78,6 +78,23 @@ export class BoardsController {
 - 프로바이더의 주요 특징은, 종속성으로 `주입`할 수 있다는 점이다. (즉, 객체는 서로 다양한 관계를 맺을 수 있으며, 객체의 인스턴스를 연결하는 기능은 대부분 Nest 런타임 시스템에 위임될 수 있다고 한다.)
 - 프로바이더 : 의존성 주입 패턴에서 사용되는 용어로, 애플리케이션의 다양한 부분에 필요한 객체나 서비스를 제공하는 역할을 수행하는 것이다. Nest.js의 프로바이더는 클래스의 인스턴스를 생성하고 관리하며, 다른 클래스에서 이를 주입하여 컨트롤러 등에서 사용할 수 있도록 해준다.
 
+### Provider 등록 방법
+
+- Provider를 사용하기 위해서는 해당 프로바이더를 Nest.js의 module 파일에 등록해 줘야 사용할 수 있다.
+- module 파일의 providers 항목 안에 사용하고자 하는 provider를 넣어주면 된다.
+
+```
+import { Module } from '@nestjs/common';
+import { BoardsController } from './boards.controller';
+import { BoardsService } from './boards.service';
+
+@Module({
+  controllers: [BoardsController],
+  providers: [BoardsService]
+})
+export class BoardsModule {}
+```
+
 ### Nest JS의 Service 란?
 
 - 서비스는 소프트웨어 개발 내의 공통적인 개념으로, 컨트롤러에서 데이터의 유효성 체크를 하거나 데이터베이스에 아이템을 생성하는 등의 작업을 하는 부분을 말한다.
@@ -90,6 +107,7 @@ export class BoardsController {
 - this.appService.getHello(); 이런 식으로 Service에 정의해 놓은 메서드를 아래와 같은 방법으로 구현하면 Controller에서 가져와 사용(종속성 주입)할 수 있다.
 
 ```
+import { Controller, Get, Param } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board } from './boards.model'
 
