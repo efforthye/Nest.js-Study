@@ -88,7 +88,7 @@
   - start:dev : package.json에 있는 개발 모드로 시작할 때의 스크립트이다.
 - 시작을 하게 되면 dist 폴더가 생성되고, LOG가 찍히면서 프로젝트가 잘 실행됨을 확인할 수 있다.
 
-### 모듈 생성방법
+### 모듈 생성 방법
 
 - boards 모듈 생성 명령어(프로젝트 루트 경로) : `nest g module boards`
   - nest : using nestcli
@@ -96,6 +96,11 @@
   - module : schematic that i want to create
   - boards : name of the schematic
 - 해당 명령어를 입력하면 src에 boards 폴더 및 boards 모듈이 생성된다.
+
+### 컨트롤러 생성 방법
+
+- boards 컨트롤러 생성 명령어(프로젝트 루트 경로) : `nest g controller boards --no-spec`
+  - --no-spec : 테스트를 위한 소스 코드 생성을 하지 않겠다는 명령어이다.
 
 ## 3. 기본 CRUD 방법 (로컬 메모리)
 
