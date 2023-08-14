@@ -207,8 +207,7 @@ export class BoardsController {
 
 ### Read : 모든 게시물을 가져오는 서비스 만들기
 
-- 모든 게시물 데이터를 데이터베이스에서 가져오는 로직 구현
-- 해당 로직은 Service에서 구현해 주면 되며, 우선 데이터베이스를 연력하지 않고 데이터를 로컬 메모리에 담아 처리해볼 예정이다.
+- 해당 로직은 Service에서 구현해 주면 되며, 우선 데이터베이스를 연결하지 않고 데이터를 로컬 메모리에 담아 처리한다.
 
 ```
 import { Injectable } from 'nestjs/common';
@@ -242,7 +241,7 @@ export class BoardsController {
 }
 ```
 
-- 위와 같은 처리가 완료되면, `npm run start:dev`로 서버를 실행하고 http://localhost:3000/boards 접근 시 해당 게시글 목록이 출력되게 된다.
+- 위와 같은 처리가 완료되면, `npm run start:dev`로 서버를 실행하고 http://localhost:3000/boards 접근 시 해당 게시글 목록이 출력된다.
 
 ## 4. PostgreSQL & TypeORM
 
