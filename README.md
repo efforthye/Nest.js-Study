@@ -124,6 +124,12 @@ export class BoardsController {
 
 - 위 코드를 보면, BoardsService를 Contuctor 클래스에서 가져오고(Injected) 있다. 이후 Private 문법을 사용해 boardsService를 정의하여 Controller 안에서 사용할 수 있게 만들었다. 이렇게 할 수 있는 이유는 타입스크립트의 기능을 이용해서 종속성을 타입으로 해결할 수 있기 때문이다.
 
+### Service 생성 방법
+
+1. 우선, 데이터베이스에서 데이터를 가져오거나 게시판 생성시 해당 데이터를 넣어주는 등의 로직을 처리하기 전 boards라는 이름의 service를 먼저 생성하여 준다.
+   - boards service 생성 명령어(프로젝트 루트 경로) : `nest g service boards --no-spec`
+   - 해당 명령어를 입력하면 src 폴더의 boards 폴더 내에 boards.service.ts 파일이 생성된다.
+
 <br/><br/>
 
 ## 2. Nest JS 시작하기
