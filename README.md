@@ -205,6 +205,22 @@ export class BoardsController {
   - 또한, 각 모듈을 구성하는 Controller, Service, Repository 등이 있는데 이러한 경우 NestJS에서는 어떠한 용도로 사용되는지, BoardModule 안에는 BoardController, BoardEntity, BoardService, BoardRepository, ValidationPipe와 같은 부분이 있는데 각 부분은 어떤 기능을 수행하는지 등에 대하여 알아 볼 예정이다.
     <br/><br/>
 
+### Read : 모든 게시물을 가져오는 서비스 만들기
+
+- 모든 게시물 데이터를 데이터베이스에서 가져오는 로직 구현
+- 해당 로직은 Service에서 구현해 주면 되며, 우선 데이터베이스를 연력하지 않고 데이터를 로컬 메모리에 담아 처리해볼 예정이다.
+
+```
+import { Injectable } from 'nestjs/common';
+
+@Injectable()
+export class BoardsService {
+  private boards = []; // 게시물 데이터 저장
+}
+```
+
+- 위 코드에서 private 접근제한자를 사용한 이유는 다른 컴포넌트에서 해당 배열 값을 수정할 수 없도록 접근을 제한하기 위함이다.
+
 ## 4. PostgreSQL & TypeORM
 
 <br/><br/>
