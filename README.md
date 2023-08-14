@@ -102,7 +102,13 @@ export class BoardsModule {}
 - Nest.js의 서비스는 @Injectable 데코레이터로 감싸져 모듈에 제공된다. 이 인스턴스는 애플리케이션 전체에서 사용될 수 있다.
   ![Alt text](images/image6.png)
 
-### Service를 Controller에서 이용할 수 있는 방법
+### Service 생성 방법
+
+1. 우선, 데이터베이스에서 데이터를 가져오거나 게시판 생성시 해당 데이터를 넣어주는 등의 로직을 처리하기 전 boards라는 이름의 service를 먼저 생성하여 준다.
+   - boards service 생성 명령어(프로젝트 루트 경로) : `nest g service boards --no-spec`
+   - 위 명령어를 입력하면 src 폴더의 boards 폴더 내에 boards.service.ts 파일이 생성되며 module의 provider 부분에 해당 service가 등록된다. 해당 service 내부에서 데이터베이스 관련 작업들을 해주면 된다.
+
+### Service를 Controller에서 이용할 수 있는 방법 (종속성 주입, Dependency Injection)
 
 - this.appService.getHello(); 이런 식으로 Service에 정의해 놓은 메서드를 아래와 같은 방법으로 구현하면 Controller에서 가져와 사용(종속성 주입)할 수 있다.
 
@@ -123,12 +129,9 @@ export class BoardsController {
 ```
 
 - 위 코드를 보면, BoardsService를 Contuctor 클래스에서 가져오고(Injected) 있다. 이후 Private 문법을 사용해 boardsService를 정의하여 Controller 안에서 사용할 수 있게 만들었다. 이렇게 할 수 있는 이유는 타입스크립트의 기능을 이용해서 종속성을 타입으로 해결할 수 있기 때문이다.
-
-### Service 생성 방법
-
-1. 우선, 데이터베이스에서 데이터를 가져오거나 게시판 생성시 해당 데이터를 넣어주는 등의 로직을 처리하기 전 boards라는 이름의 service를 먼저 생성하여 준다.
-   - boards service 생성 명령어(프로젝트 루트 경로) : `nest g service boards --no-spec`
-   - 해당 명령어를 입력하면 src 폴더의 boards 폴더 내에 boards.service.ts 파일이 생성된다.
+- BoardsService를 타입스크립트의 타입으로 정의하여 사용
+- private 등의 접근 제한자는 JavaScript에서 사용할 수 없지만 TypeScript에선 사용 가능하다.
+- 해당 접근 제한자(private)를 이용하여 생성자 내부에 파라미터를 선언하게 되면 BoardsService 파라미터가 암묵적으로 BoardsController 클래스 내의 boardsService 프로퍼티로 선언된다.
 
 <br/><br/>
 
