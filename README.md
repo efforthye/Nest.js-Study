@@ -74,7 +74,7 @@ export class BoardsController {
 
 ### Nest JS의 Providers 란?
 
-- 프로바이더는 Nest의 기본 개념으로, 대부분의 기본 Nest 클래스는 서비스, 리포지토리, 팩토리, 헬터 등의 프로바이더로 등록할 수 있다. ex) ???
+- 프로바이더는 Nest의 기본 개념으로, 대부분의 기본 Nest 클래스는 서비스, 리포지토리, 팩토리, 헬퍼 등의 프로바이더로 등록할 수 있다.
 - 프로바이더의 주요 특징은, 종속성으로 `주입`할 수 있다는 점이다. (즉, 객체는 서로 다양한 관계를 맺을 수 있으며, 객체의 인스턴스를 연결하는 기능은 대부분 Nest 런타임 시스템에 위임될 수 있다고 한다.)
 - 프로바이더 : 의존성 주입 패턴에서 사용되는 용어로, 애플리케이션의 다양한 부분에 필요한 객체나 서비스를 제공하는 역할을 수행하는 것이다. Nest.js의 프로바이더는 클래스의 인스턴스를 생성하고 관리하며, 다른 클래스에서 이를 주입하여 컨트롤러 등에서 사용할 수 있도록 해준다.
 
@@ -85,7 +85,28 @@ export class BoardsController {
 - Nest.js의 서비스는 @Injectable 데코레이터로 감싸져 모듈에 제공된다. 이 인스턴스는 애플리케이션 전체에서 사용될 수 있다.
   ![Alt text](images/image6.png)
 
-  <br/><br/>
+### Service를 Controller에서 이용할 수 있는 방법
+
+- this.appService.getHello(); 이런 식으로 Service에 정의해 놓은 메서드를 아래와 같은 방법으로 구현하면 Controller에서 가져와 사용(종속성 주입)할 수 있다.
+
+```
+import { BoardsService } from './boards.service';
+import { Board } from './boards.model'
+
+@Controller('boards')
+export class BoardsController {
+  constructor(private boardsService: BoardsService) {}
+
+  @Get('/:id')
+  getBoardById(@Param('id') is: string): Board {
+    return this.boardsService.getBoardById(id);
+  }
+}
+```
+
+- 위 코드를 보면, BoardsService를 Contuctor 클래스에서 가져오고(Injected) 있다. 이후 Private 문법을 사용해 boardsService를 정의하여 Controller 안에서 사용할 수 있게 만들었다. 이렇게 할 수 있는 이유는 타입스크립트의 기능을 이용해서 종속성을 타입으로 해결할 수 있기 때문이다.
+
+<br/><br/>
 
 ## 2. Nest JS 시작하기
 
