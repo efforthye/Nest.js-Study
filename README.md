@@ -99,8 +99,11 @@
 
 ### 컨트롤러 생성 방법
 
+![Alt text](image-4.png)
+
 - boards 컨트롤러 생성 명령어(프로젝트 루트 경로) : `nest g controller boards --no-spec`
   - --no-spec : 테스트를 위한 소스 코드 생성을 하지 않겠다는 명령어이다.
+- 해당 명령어를 입력하면 src의 boards에 boards 컨트롤러가 생성된다.
 
 ## 3. 기본 CRUD 방법 (로컬 메모리)
 
