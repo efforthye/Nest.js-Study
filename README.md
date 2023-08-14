@@ -216,10 +216,33 @@ import { Injectable } from 'nestjs/common';
 @Injectable()
 export class BoardsService {
   private boards = []; // 게시물 데이터 저장
+
+  getAllBoards() { // 모든 게시물 정보 출력 메서드
+    return this.boards;
+  }
 }
 ```
 
 - 위 코드에서 private 접근제한자를 사용한 이유는 다른 컴포넌트에서 해당 배열 값을 수정할 수 없도록 접근을 제한하기 위함이다.
+
+- 이후 아래와 같이 boards controller에 해당 라우팅을 설정해준다.
+
+```
+import { Controller, Get } from '@nestjs/common';
+import { BoardsService } from './boards.service';
+
+@Controller('boards')
+export class BoardsController {
+  constructor(private boardsService: BoardsService) {}
+
+  @Get() // Get 데코레이터 지정
+  getAllBoard() { // getAllBoard() 메서드 선언
+    return this.boardsService.getAllBoards(); // 서비스 메서드 호출
+  }
+}
+```
+
+- 위와 같은 처리가 완료되면, `npm run start:dev`로 서버를 실행하고 localhost:3000/boards 접근 시 해당 게시글 목록이 출력되게 된다.
 
 ## 4. PostgreSQL & TypeORM
 
