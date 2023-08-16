@@ -294,6 +294,69 @@ export enum BoardStatus {
 
 #### 게시물을 생성하는 Controller 만들기
 
+- service에 로직을 구현하였다면 이제 controller에서 해당 기능을 활용하여 아래와 같이 메서드를 만들어 요청과 응답을 구현하여 준다.
+
+```
+  @Post()
+  createBoard() {
+
+  }
+```
+
+- 또한 Nest.js 에서는 요청값을 받을 때 아래와 같이 데코레이션으로 받아준다.
+
+```
+  @Post()
+  createBoard(@Body() body) {
+    console.log({ body });
+  }
+```
+
+- 만약 값을 하나만 받아오고 싶다면 아래와 같이 `@Body('title') title` 과 같은 형태로 가져올 수도 있다.
+
+```
+  @Post()
+  createBoard(@Body('description') description) {
+    console.log({ description });
+  }
+```
+
+- 아래 코드와 같이 여러 요청값을 정의하여 받아와 타입을 정의하여 주어도 된다.
+
+```
+  @Post()
+  createBoard(
+    @Body('title') title: string,
+    @Body('description') description: string,
+  ) {
+    console.log({ title, description });
+  }
+```
+
+- 아래와 같은 방식으로 값을 받아와도 될 듯 한데, 위와 같은 방식이 더 보기 좋은 것 같다. (혜림)
+
+```
+  @Post()
+  createBoard(@Body() body) {
+    const { title, description }: { title: string; description: string } = body;
+    console.log({ title, description });
+  }
+```
+
+- 이제 실제 게시글을 생성하는 서비스 메서드를 가져와 호출함과 동시에 리턴해 준다.
+
+```
+  @Post()
+  createBoard(
+    @Body('title') title: string,
+    @Body('description') description: string,
+  ): Board {
+    // 위와 같이 리턴값의 타입을 정해준다.
+    console.log({ title, description });
+    return this.boardsService.createBoard(title, description);
+  }
+```
+
 ## 4. PostgreSQL & TypeORM
 
 <br/><br/>
