@@ -242,7 +242,26 @@ export class BoardsController {
 ```
 
 - 위와 같은 처리가 완료되면, `npm run start:dev`로 서버를 실행하고 http://localhost:3000/boards 접근 시 해당 게시글 목록이 출력된다.
-- 이후 인터페이스나 클래스 등을 board.model.ts 등에 생성하여 출력 타입 등을 정의해 주어도 된다.
+
+### 모델 정의하기
+
+- src/boards 폴더 내에 board.model.ts 파일을 생성하여 아래와 같이 모델의 타입을 인터페이스 혹은 클래스 방식으로 정의하여 준다.
+
+```
+export interface Board {
+  id: string;
+  title: string;
+  description: string;
+  status: BoardStatus; // 공개, 비공개 상태
+}
+
+export enum BoardStatus {
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE',
+}
+```
+
+- 이후 게시물 출력 등의 메서드에 출력 타입 등을 해당 모델로 정의해 주어도 된다.
 
 ### Create : 게시물을 생성하는 서비스 만들기
 
