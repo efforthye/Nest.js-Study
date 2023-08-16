@@ -363,7 +363,7 @@ export enum BoardStatus {
 
 ### 데이터 교환 객체 (DTO : Data Transfer Object)
 
-#### DTO의 정의
+#### DTO 란?
 
 - DTO란 계층 간 데이터 교환을 위한 객체로, DB에서 데이터를 얻어 service 혹은 controller 등으로 보낼 때 사용하는 객체를 말한다.
 - DTO는 주로 interface나 class를 이용하여 데이터가 네트워크를 통해 전송되는 방법을 정의한다. (Nest JS는 class를 이용하는 것을 강력 추천하고 있다!)
