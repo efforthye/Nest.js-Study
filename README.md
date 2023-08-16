@@ -242,6 +242,9 @@ export class BoardsController {
 ```
 
 - 위와 같은 처리가 완료되면, `npm run start:dev`로 서버를 실행하고 http://localhost:3000/boards 접근 시 해당 게시글 목록이 출력된다.
+- 이후 인터페이스나 클래스 등을 board.model.ts 등에 생성하여 출력 타입 등을 정의해 주어도 된다.
+
+### Create : 게시물을 생성하는 서비스 만들기
 
 ## 4. PostgreSQL & TypeORM
 
