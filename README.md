@@ -357,6 +357,8 @@ export enum BoardStatus {
   }
 ```
 
+- 컨트롤러 구현이 완료되었다면, `npm run start:dev`를 통하여 서버를 열고, `포스트맨으로 api 요청`을 보내 성공적으로 게시글이 생성되는지 테스트하면 된다.
+
 ## 4. PostgreSQL & TypeORM
 
 <br/><br/>
