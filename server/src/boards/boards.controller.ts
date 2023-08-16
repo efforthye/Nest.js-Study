@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board } from './board.model';
+import { CreateBoardDto } from './dto/create-board.dto';
 
 @Controller('boards')
 export class BoardsController {
@@ -13,13 +14,7 @@ export class BoardsController {
   }
 
   @Post()
-  // Nest.js 에서는 요청값을 받을 때 아래와 같이 데코레이션으로 받아준다.
-  createBoard(
-    @Body('title') title: string,
-    @Body('description') description: string,
-  ): Board {
-    // 위와 같이 리턴값의 타입을 정해줄 수도 있다.
-    console.log({ title, description });
-    return this.boardsService.createBoard(title, description);
+  createBoard(@Body() createBoardDto: CreateBoardDto): Board {
+    return this.boardsService.createBoard(createBoardDto);
   }
 }

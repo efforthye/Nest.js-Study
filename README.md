@@ -379,6 +379,78 @@ export enum BoardStatus {
 - 현재 데이터 흐름을 살펴 보면 Board를 위한 프로퍼티들(title, description 등)을 여러 곳에서 사용하고 있다. 지금은 간단한 애플리케이션을 만들기 때문에 몇 개의 프로퍼티만 불러 주고 몇 군데에서만 불러 주면 된다.
 - 하지만 정말 많은 프로퍼티를 가지고 정말 여러 군데에서 이용하고 있는 경우 갑자기 한 곳에서 프로퍼티 명을 바꿔 주어야 한다면, 다른 곳에 똑같이 쓰인 모든 곳의 프로퍼티도 똑같이 바꿔 주어야 한다. 그럴 시 애플리케이션의 유지보수성이 급격히 안 좋아지기 때문에 DTO를 사용하여 해결해 주어야 한다.
 
+### 게시물 생성을 위한 DTO 구현
+
+#### DTO 파일 작성
+
+- 클래스는 인터페이스와 다르게 런타임(프로그램이 실행되고 있는 동안)에서 작동하기 때문에 파이프 같은 기능을 이용할 때 더 유용하다.
+- 우선 src/boards 폴더에 dto라는 폴더를 생성하여 주고, 해당 폴더에 create-board.dto.ts 파일을 만든 후, 아래와 같이 DTO 클래스를 작성하여 준다.
+
+```
+export class CreateBoardDto {
+  title: string;
+  description: string;
+}
+```
+
+#### DTO 적용
+
+- 이후 작성한 DTO 파일을 controller와 service에 적용하여 주면 된다.
+- 아래와 같이 service에 dto를 적용하여 준다.
+
+  - 기존 코드
+
+  ```
+  createBoard(title: string, description: string) {
+    const board: Board = {
+      title,
+      description,
+      status: BoardStatus.PUBLIC,
+      id: uuid(),
+    };
+
+    this.boards.push(board);
+    return board;
+  }
+  ```
+
+  - dto를 적용한 코드
+
+  ```
+  createBoard(createBoardDto: CreateBoardDto) {
+    const { title, description } = createBoardDto;
+
+    const board: Board = {
+      title,
+      description,
+      status: BoardStatus.PUBLIC,
+      id: uuid(),
+    };
+
+    this.boards.push(board);
+    return board;
+  }
+  ```
+
+- 아래와 같이 controller에도 dto를 적용하여 준다.
+  - 기존 코드
+  ```
+  @Post()
+  createBoard(
+    @Body('title') title: string,
+    @Body('description') description: string,
+  ): Board {
+    return this.boardsService.createBoard(title, description);
+  }
+  ```
+  - dto를 적용한 코드
+  ```
+  @Post()
+  createBoard(@Body() createBoardDto: CreateBoardDto): Board {
+    return this.boardsService.createBoard(createBoardDto);
+  }
+  ```
+
 ## 4. PostgreSQL & TypeORM
 
 <br/><br/>
