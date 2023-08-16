@@ -359,6 +359,7 @@ export enum BoardStatus {
 
 - 컨트롤러 구현이 완료되었다면, 프로젝트 루트 경로에서 `npm run start:dev`를 통하여 서버를 열고, `포스트맨으로 api 요청`을 보내 성공적으로 게시글이 생성되는지 테스트해보면 된다.
   - 테스트 : post 방식으로 http://localhost:3000/boards에 title과 description을 지정하여 요청을 보내면 응답값이 출력된다.
+    ![Alt text](images/image-7.png)
 
 ## 4. PostgreSQL & TypeORM
 
