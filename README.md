@@ -272,24 +272,15 @@ export enum BoardStatus {
 
 ```
   createBoard(title: string, description: string) {
-    // 생성할 게시물을 정의하여 준다. id는 임시로 uuid 모듈을 이용하여 처리해 주었다.
-    // uuid 모듈 설치 (프로젝트 루트 경로)
-    // npm i uuid --save
-    // uuid 모듈 임포트
-    // import { v1 as uuid } from 'uuid';
-    // uuid를 호출하여 유니크 값 생성 : uuid()
     const board: Board = {
       title,
       description,
       status: BoardStatus.PUBLIC, // 기본 공개 상태
-      // uuid 모듈을 사용하여 임시 유니크 아이디 지정
-      id: uuid(),
+      id: uuid(), // 임시 유니크 아이디 지정(uuid 모듈 활용)
     };
 
-    // 게시물 목록(로컬 메모리)에 추가하여 준다.
-    this.boards.push(board);
-    // 어떤 게시물이 생성되었는지 리턴한다.
-    return board;
+    this.boards.push(board); // 게시물 목록(로컬 메모리)에 추가
+    return board; // 생성된 게시물 정보 리턴
   }
 ```
 
