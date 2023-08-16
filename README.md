@@ -263,7 +263,45 @@ export enum BoardStatus {
 
 - 이후 게시물 출력 등의 메서드에 출력 타입 등을 해당 모델로 정의해 주어도 된다.
 
-### Create : 게시물을 생성하는 서비스 만들기
+### Create : 게시물 생성
+
+#### 게시물을 생성하는 서비스 만들기
+
+- 우선 service에서 게시물에 관한 로직을 처리하고, 이후 controller에서 서비스를 불러와 준다.
+- boards.service.ts에 아래와 같이 게시글 생성 메서드를 정의하여 준다.
+
+```
+  createBoard(title: string, description: string) {
+    // 생성할 게시물을 정의하여 준다. id는 임시로 uuid 모듈을 이용하여 처리해 주었다.
+    // uuid 모듈 설치 (프로젝트 루트 경로)
+    // npm i uuid --save
+    // uuid 모듈 임포트
+    // import { v1 as uuid } from 'uuid';
+    // uuid를 호출하여 유니크 값 생성 : uuid()
+    const board: Board = {
+      title,
+      description,
+      status: BoardStatus.PUBLIC, // 기본 공개 상태
+      // uuid 모듈을 사용하여 임시 유니크 아이디 지정
+      id: uuid(),
+    };
+
+    // 게시물 목록(로컬 메모리)에 추가하여 준다.
+    this.boards.push(board);
+    // 어떤 게시물이 생성되었는지 리턴한다.
+    return board;
+  }
+```
+
+- 로컬 메모리에서 id를 유니크한 값으로 지정하기 위하여 uuid라는 모듈을 사용하였다.
+
+#### uuid 모듈 사용법
+
+1. uuid 모듈 설치 (프로젝트 루트 경로) : `npm i uuid --save`
+2. uuid 모듈 임포트 : `import { v1 as uuid } from 'uuid';`
+3. uuid를 호출하여 유니크한 값 생성 : `uuid()`
+
+#### 게시물을 생성하는 Controller 만들기
 
 ## 4. PostgreSQL & TypeORM
 
