@@ -5,6 +5,7 @@
 // * 클래스 : 변수의 타입을 체크함은 물론 인스턴스 또한 생성할 수 있다.
 
 // 1. board 모델의 구조 정의 방법 - 인터페이스
+// -> 이후 service 부분에서 보드에 대한 정보와 데이터 형식을 정의해 준다.
 export interface Board {
   id: string;
   title: string;
