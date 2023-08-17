@@ -453,7 +453,7 @@ export class CreateBoardDto {
 
 ### id로 특정 게시물 가져오기
 
-- service
+#### service
 
 ```
 getBoardById(id: string): Board {
@@ -461,7 +461,7 @@ getBoardById(id: string): Board {
 }
 ```
 
-- controller
+#### controller
 
 ```
 @Get('/:id')
