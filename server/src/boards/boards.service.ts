@@ -38,6 +38,13 @@ export class BoardsService {
     return board;
   }
 
+  // 게시글 상태 수정
+  updateBoardStatus(id: string, status: BoardStatus): Board {
+    const board = this.getBoardById(id);
+    board.status = status;
+    return board;
+  }
+
   // 게시글 삭제
   deleteBoard(id: string): void {
     this.boards = this.boards.filter((board) => board.id !== id);

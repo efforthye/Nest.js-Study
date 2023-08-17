@@ -476,6 +476,31 @@ getBoardById(@Param('id') id: string): Board {
 getBoardById(@Param() params: string[]) {}
 ```
 
+### Update : 특정 게시물의 상태 수정(공개/비공개)
+
+#### service
+
+```
+updateBoardStatus(id: string, status: BoardStatus): Board {
+  const board = this.getBoardById(id);
+  board.status = status;
+  return board;
+}
+```
+
+#### controller
+
+```
+@Patch('/:id/status')
+updateBoardStatus(
+  // id는 param, status는 body로 받아와 주었다.
+  @Param('id') id: string,
+  @Body('status') status: BoardStatus,
+) {
+  return this.boardsService.updateBoardStatus(id, status)
+}
+```
+
 ### Delete : id로 특정 게시물 삭제
 
 #### service
