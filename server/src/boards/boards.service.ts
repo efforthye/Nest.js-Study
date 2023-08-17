@@ -14,6 +14,11 @@ export class BoardsService {
     return this.boards;
   }
 
+  // id로 특정 게시물 가져오기
+  getBoardById(id: string): Board {
+    return this.boards.find((board) => board.id === id);
+  }
+
   // 게시글 생성 (제목, 내용)
   createBoard(createBoardDto: CreateBoardDto) {
     const { title, description } = createBoardDto;

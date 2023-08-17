@@ -451,6 +451,33 @@ export class CreateBoardDto {
   }
   ```
 
+### id로 특정 게시물 가져오기
+
+- service
+
+```
+getBoardById(id: string): Board {
+  return this.boards.find((board) => board.id === id);
+}
+```
+
+- controller
+
+```
+@Get('/:id')
+getBoardById(@Param('id') id: string): Board {
+  return this.boardsService.getBoardById(id);
+}
+```
+
+- 만약 여러 개의 파라미터를 받아 가져와야 할 경우 아래와 같이 string 배열 타입으로 지정하여 값을 받아와도 된다.
+
+```
+getBoardById(@Param() params: string[]) {
+
+}
+```
+
 ## 4. PostgreSQL & TypeORM
 
 <br/><br/>
