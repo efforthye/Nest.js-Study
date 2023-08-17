@@ -8,11 +8,12 @@
 1. [Nest.js의 기본 개념](#1-nestjs의-기본-개념)
 2. [Nest JS 설치 방법](#2-nest-js-시작하기)
 3. [기본 CRUD (로컬 메모리)](#3-기본-crud-방법-로컬-메모리)
-4. [PostgreSQL & TypeORM](#4-postgresql--typeorm)
-5. [JWT 모듈을 통한 인증 처리](#5-jwt-모듈을-통한-인증-처리)
-6. [JWT와 PASSPORT 모듈을 이용한 권한 처리](#6-jwt와-passport-모듈을-이용한-권한-처리)
-7. [어플리케이션 로그 남기기](#7-어플리케이션-로그-남기기)
-8. [AWS 등 클라우드 배포 시 설정](#8-aws-등-클라우드-배포-시-설정)
+4. [Pipe 이용 방법](#4-pipe-이용)
+5. [PostgreSQL & TypeORM](#5-postgresql--typeorm)
+6. [JWT 모듈을 통한 인증 처리](#6-jwt-모듈을-통한-인증-처리)
+7. [JWT와 PASSPORT 모듈을 이용한 권한 처리](#7-jwt와-passport-모듈을-이용한-권한-처리)
+8. [어플리케이션 로그 남기기](#8-어플리케이션-로그-남기기)
+9. [AWS 등 클라우드 배포 시 설정](#9-aws-등-클라우드-배포-시-설정)
    <br/><br/>
 
 ## 1. Nest.js의 기본 개념
@@ -523,7 +524,7 @@ deleteBoard(@Param('id') id: string): void {
 }
 ```
 
-## 3-2. Pipe 이용
+## 4. Pipe 이용
 
 ### Nest JS의 Pipe 란?
 
@@ -605,22 +606,22 @@ deleteBoard(@Param('id') id: string): void {
     ![Alt text](images/image-10.png)
   - 만약 ParseIntPipe를 사용하지 않았다면 아무런 에러가 출력되지 않게 되므로 예외를 처리할 수 없었을 것이다. 이와 같이 파이프를 간편하게 사용하여 유효성을 검증하여 주면 예외 처리에 도움이 된다.
 
-## 4. PostgreSQL & TypeORM
+## 5. PostgreSQL & TypeORM
 
 <br/><br/>
 
-## 5. JWT 모듈을 통한 인증 처리
+## 6. JWT 모듈을 통한 인증 처리
 
 <br/><br/>
 
-## 6. JWT와 PASSPORT 모듈을 이용한 권한 처리
+## 7. JWT와 PASSPORT 모듈을 이용한 권한 처리
 
 <br/><br/>
 
-## 7. 어플리케이션 로그 남기기
+## 8. 어플리케이션 로그 남기기
 
 <br/><br/>
 
-## 8. AWS 등 클라우드 배포 시 설정
+## 9. AWS 등 클라우드 배포 시 설정
 
 <br/><br/>
