@@ -523,6 +523,88 @@ deleteBoard(@Param('id') id: string): void {
 }
 ```
 
+## 3-2. Pipe 이용
+
+### Nest JS의 Pipe 란?
+
+#### Pipe 의 정의 및 장점
+
+- 파이프는 @Infectable() 데코레이터로 주석이 달린 클래스이다. 이는 data transformation과 data vaildation을 위해서 사용된다.
+- 파이프는 컨트롤러 경로 처리기에 의해 처리되는 인수값에 대하여 작동한다.
+- Nest는 메서드가 호출되기 전에 파이프를 삽입하고, 파이프는 메서드로 향하는 인수를 수신하여 이에 대해 작동한다.
+  ![Alt text](images/image-9.png)
+- 만약 위 그림에서 파이프가 없다면 인수값의 데이터가 바로 통과하여 핸들러 쪽으로 가게 되는데, 파이프가 있다면 인수값의 데이터를 검증하여 실패 시 에러를 발생시킬 수 있게 된다.
+
+#### Data Transformation (데이터 변환)
+
+- 데이터 트랜스 포메이션은 입력한 데이터를 원하는 형식으로 변환하는 것을 뜻한다. ex) 문자열에서 정수로
+- 만약 숫자를 받길 원하는데 문자열 형식으로 값이 도착한다면 파이프에서 자동으로 숫자로 바꿔줄 수 있다.
+
+#### Data Validation (유효성 검사)
+
+- 데이터 벨리데이션은 입력 데이터를 평가하여 값이 유효할 경우 그대로 값을 전달하거나 값이 유효하지 않을 경우 예외를 발생시키는 역할을 한다. ex) 이름의 길이가 10자 이하여야 하는데 10자를 초과할 경우 에러를 발생시킨다.
+
+#### Pipe를 사용하는 방법(Binding Pipes)
+
+- 파이프를 사용하는 방법은 크게 세 가지로 나눠질 수 있다.
+  - Handler-level Pipes(핸들러 레벨) : @UsePipes() 데코레이터를 이용하여 사용할 수 있다. 이 파이프는 핸들러 레벨이기 때문에 모든 파라미터에 적용된다. (title, description)
+    ```
+    @Post()
+    @UsePipes(pipe)
+    createBoard(
+      @Body('title') title,
+      @Body('description') description
+    ) {}
+    ```
+  - Parameter-level Pipes(파라미터 레벨) : 이는 특정한 파라미터에만 적용되는 파이프이다. 아래와 같은 경우 title에만 파이프가 적용된다.
+    ```
+    @Post()
+    createBoard(
+      @Body('title', ParameterPipe) title,
+      @Body('description') description
+    ) {}
+    ```
+  - Global-level Pipes(글로벌 레벨) : 글로벌 파이프는 애플리케이션 레벨의 파이프이다. 클라이언트에서 들어오는 모든 요청에 대하여 적용이 되므로 가장 큰 범위의 파이프라고 볼 수 있다. 이는 가장 상단의 영역인 `main.ts`에 아래와 같이 넣어주면 된다.
+    - 기존 코드
+    ```
+    async function bootstrap() {
+      const app = await NestFactory.create(AppModule);
+      await app.listen(3000);
+    }
+    bootstrap();
+    ```
+    - 파이프를 추가한 코드
+    ```
+    async function bootstrap() {
+      const app = await NestFactory.create(AppModule);
+      app.useGlobalPipes(GlobalPipes); // 파이프 추가
+      await app.listen(3000)
+    }
+    bootstrap();
+    ```
+
+#### Nest JS 기본 내장 파이프 (Built-In Pipes)
+
+- Nest Js 에서 기본적으로 사용할 수 있도록 만들어 놓은 6가지의 Nest Js 내장 파이프가 있다.
+  - ValidationPipe
+  - ParseIntPipe
+  - ParseBoolPipe
+  - ParseArrayPipe
+  - ParseUUIDPipe
+  - DefaultValuePipe
+- 위 이름들을 보면 각각의 파이프가 어떠한 역할을 하는지 짐작할 수 있다.
+- 그 중 ParseIntPipe를 이용하는 방법은 아래와 같으며 간단하는 것을 알 수 있다.
+  - 원래는 파라미터 값으로 숫자가 와야 하는 핸들러가 있을 경우, 아래와 같이 ParseIntPipe라는 파이프를 사용하여 주면
+    ```
+    @Get(':id')
+    findOne(@Param('id', ParseIntPipe) id : number) {
+      return;
+    }
+    ```
+  - 해당 핸들러에 abc 등의 임의 문자열을 보냈을 때, 아래와 같이 에러가 발생하게 된다.
+    ![Alt text](images/image-10.png)
+  - 만약 ParseIntPipe를 사용하지 않았다면 아무런 에러가 출력되지 않게 되므로 예외를 처리할 수 없었을 것이다. 이와 같이 파이프를 간편하게 사용하여 유효성을 검증하여 주면 예외 처리에 도움이 된다.
+
 ## 4. PostgreSQL & TypeORM
 
 <br/><br/>
