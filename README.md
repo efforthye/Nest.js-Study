@@ -476,6 +476,26 @@ getBoardById(@Param('id') id: string): Board {
 getBoardById(@Param() params: string[]) {}
 ```
 
+### Delete : id로 특정 게시물 삭제
+
+#### service
+
+```
+deleteBoard(id: string): void {
+  // 아이디가 다른 것만 boards 배열에 남겨 주어 삭제을 구현하였다.
+  this.boards = this.boards.filter((board) => board.id !== id);
+}
+```
+
+#### controller
+
+```
+@Delete('/:id')
+deleteBoard(@Param('id') id: string): void {
+  this.boardsService.deleteBoard(id);
+}
+```
+
 ## 4. PostgreSQL & TypeORM
 
 <br/><br/>

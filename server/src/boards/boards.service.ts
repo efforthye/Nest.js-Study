@@ -37,4 +37,9 @@ export class BoardsService {
     // 어떤 게시물이 생성되었는지 리턴한다.
     return board;
   }
+
+  // 게시글 삭제
+  deleteBoard(id: string): void {
+    this.boards = this.boards.filter((board) => board.id !== id);
+  }
 }
