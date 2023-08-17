@@ -493,13 +493,15 @@ updateBoardStatus(id: string, status: BoardStatus): Board {
 ```
 @Patch('/:id/status')
 updateBoardStatus(
-  // id는 param, status는 body로 받아와 주었다.
   @Param('id') id: string,
   @Body('status') status: BoardStatus,
 ) {
   return this.boardsService.updateBoardStatus(id, status)
 }
 ```
+
+- :id는 Param, status는 Body로 값을 받아 온 이유
+  - ':' 이 붙은 경우 경로 매개변수로 취급된다. 이에 따라 매개변수(param)와 본문(body)이 나눠지게 되므로 id는 Param, status는 Body로 값을 받아오게 되었다.
 
 ### Delete : id로 특정 게시물 삭제
 
