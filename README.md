@@ -724,7 +724,7 @@ deleteBoard(@Param('id') id: string): void {
       this.boards = this.boards.filter((board) => board.id !== found.id); // 찾은 게시물의 id로 수정
     }
     ```
-  - 위 코드와 같이 getBoardById 메서드를 추가만 해주어도 게시물이 있는지 해당 메서드에서 저절로 검사되기 때문에 만약 없는 게시물일 경우 알아서 에러가 응답되도록 할 수 있다.
+  - 위 코드와 같이 getBoardById 메서드를 추가만 해주어도 게시물이 있는지 해당 메서드에서 저절로 검사되기 때문에 만약 없는 게시물일 경우 알아서 에러가 응답되도록 처리할 수 있다.
 
 ## 5. PostgreSQL & TypeORM
 
