@@ -606,6 +606,66 @@ deleteBoard(@Param('id') id: string): void {
     ![Alt text](images/image-10.png)
   - 만약 ParseIntPipe를 사용하지 않았다면 아무런 에러가 출력되지 않게 되므로 예외를 처리할 수 없었을 것이다. 이와 같이 파이프를 간편하게 사용하여 유효성을 검증하여 주면 예외 처리에 도움이 된다.
 
+### Pipe를 활용한 유효성 체크
+
+#### 1. 필요한 모듈 설치(프로젝트 루트 경로)
+
+- 설치 명령어 : `npm i class-validator class-transformer --save`
+
+#### 2. 파이프 생성
+
+- 파이프 종류 문서 : https://github.com/typestack/class-validator#manual-validation
+  - @IsEmpty(), @IsString(), @Equals(comparison: any) 등등의 유효성 검사를 위한 파이프들의 정보가 있다.
+- 현재는 게시물을 생성할 때 이름과 설명에 아무런 값을 주지 않아도 문제 없이 생성된다. 이 부분을 아래와 같이 수정하여 파이프를 적용해 준다.
+- DTO 부분 수정 (이후 요청 들어올 때 컨트롤러에 파이프의 레벨을 지정해 주어야 한다. (파이프 레벨 지정 방법 참고))
+
+  - 기존 create-board.dto.ts 코드
+    ```
+    export class CreateBoardDto {
+      title: string;
+      description: string;
+    }
+    ```
+  - 파이프가 적용된 create-board.dto.ts 코드
+
+    ```
+    import { IsNotEmpty } from 'class-validator';
+
+    export class CreateBoardDto {
+      @IsNotEmpty()
+      title: string;
+
+      @IsNotEmpty()
+      description: string;
+    }
+    ```
+
+- Controller 부분 수정
+
+  - 기존 controller 코드
+
+  ```
+  @Post()
+  createBoard(@Body() createBoardDto: CreateBoardDto): Board {
+    return this.boardsService.createBoard(createBoardDto);
+  }
+  ```
+
+  - 유효성 체크 파이프가 적용된 controller 코드
+
+  ```
+  import { UsePipes, ValidationPipe } from '@nestjs/common';
+
+  @Post()
+  @UsePipes(ValidationPipe) // 파이프 적용
+  createBoard(@Body() createBoardDto: CreateBoardDto): Board {
+    return this.boardsService.createBoard(createBoardDto);
+  }
+  ```
+
+- 파이프가 적용되었다면, `npm run start:dev` 를 통하여 서버를 열고, 포스트맨 으로 `http://localhost:3000/boards` 에 POST 방식의 api 요청을 보내 아래와 같이 에러가 정상적으로 출력되는지 확인하면 된다.
+  ![Alt text](images/image-11.png)
+
 ## 5. PostgreSQL & TypeORM
 
 <br/><br/>
