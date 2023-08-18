@@ -860,8 +860,11 @@ export class BoardStatusValidationPipe implements PipeTransform {
   }
   ```
 
-- 이후 포스트맨으로 잘못된 값을 보낼 경우 아래와 같은 에러가 정상적으로 출력됨을 확인할 수 있다.
+- 이후 포스트맨으로 잘못된 값을 보낼 경우 커스텀 파이프를 통하여 아래와 같은 에러가 정상적으로 출력됨을 확인할 수 있다.
   ![Alt text](images/image-16.png)
+
+- 정상적인 값을 보낸 경우 아래와 같이 변경된 게시물의 정보가 출력된다.
+  ![Alt text](images/image-17.png)
 
 ## 5. PostgreSQL & TypeORM
 
