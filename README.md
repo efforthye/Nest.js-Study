@@ -101,7 +101,7 @@ export class BoardsModule {}
 - 서비스는 소프트웨어 개발 내의 공통적인 개념으로, 컨트롤러에서 데이터의 유효성 체크를 하거나 데이터베이스에 아이템을 생성하는 등의 작업을 하는 부분을 말한다.
   - 컨트롤러에서 구현해도 되지만, 주로 서비스에서 주로 구현하고 해당 리턴값을 다시 컨트롤러에 주고 컨트롤러에서 다시 응답하여 클라이언트에 전달하는 방식으로 구현하게 된다.
 - Nest.js의 서비스는 @Injectable 데코레이터로 감싸져 모듈에 제공된다. 이 인스턴스는 애플리케이션 전체에서 사용될 수 있다.
-  ![Alt text](images/image6.png)
+  ![Alt text](images/image-6.png)
 
 ### Service 생성 방법
 
@@ -730,8 +730,91 @@ deleteBoard(@Param('id') id: string): void {
 
 #### 커스텀 파이프 구현 방법
 
-- 먼저 새롭게 만들 커스텀 파이프에 PipeTransform 라는 인터페이스를 구현해 주어야 한다.
+- 새로운 커스텀 파이프를 만드려면, 우선 커스텀 파이프에 들어갈 PipeTransform 라는 인터페이스를 구현해 주어야 한다.
 - `PipeTransform 인터페이스는 모든 파이프에서 구현해 주어야 하는 인터페이스`이다. 또한 이것과 함께, `모든 파이프는 Nest JS가 인자를 처리하기 위해 transform() 메서드를 필요로 한다`.
+
+  - 예시) 아래와 같은 형식으로 커스텀 파이프를 구현할 수 있다.
+
+  ```
+  import { ArgumentMetadata, PipeTransform } from '@nestjs/common';
+
+  export class BoardStatusValidationPipe implements PipeTransform {
+    transform(value: any, metadata: ArgumentMetadata) {
+      console.log({value, metadata});
+      return value;
+    }
+  }
+  ```
+
+#### transform() 메서드란?
+
+- transform() 메서드는 Nest JS의 인자를 처리하기 위한 메서드이며, 두 개의 파라미터를 가진다.
+  - 첫 번째 파라미터 : 처리가 된 인자의 값(value)
+  - 두 번째 파라미터 : 인자에 대한 메타 데이터를 포함한 객체
+  ```
+  transform(value: any, metadata: ArgumentMetadata) {
+    console.log({value, metadata});
+    return value;
+  }
+  ```
+- transform() 메서드에서 return 된 값은 기본적으로 route 핸들러로 전해지며, 만약 예외(exception)가 발생하면 클라이언트에 바로 전해지게 된다.
+
+#### value와 metadata값 콘솔 결과 확인
+
+1. 우선 src/boards에 커스텀 파이프를 만들 pipes 폴더를 생성한 후, 해당 폴더에 board-status-validation.pipe.ts 파일을 생성하여 준다.
+2. 게시물에 업데이터하는 핸들러에 아래와 같이 커스텀 파이프를 넣어준다.
+
+- 아래 코드와 같이 커스텀 파이프를 구현하여 준다.(이후 파이프를 사용할 곳에서 해당 클래스를 가져와 사용해 주면 된다.)
+
+```
+import { ArgumentMetadata, PipeTransform } from '@nestjs/common';
+
+export class BoardStatusValidationPipe implements PipeTransform {
+  transform(value: any, metadata: ArgumentMetadata) {
+    console.log({ value, metadata });
+    return value;
+  }
+}
+```
+
+- 커스텀 파이프 사용 (controller)
+
+  - 기존 코드
+
+  ```
+  @Patch('/:id/status')
+  updateBoardStatus(
+    @Param('id') id: string,
+    @Body('status') status: BoardStatus,
+  ) {
+    return this.boardsService.updateBoardStatus(id, status);
+  }
+  ```
+
+  - 파이프 사용 코드 (핸들러 레벨이 아닌 파라미터 레벨의 파이프로 등록해 주었다.)
+
+  ```
+  import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
+
+  @Patch('/:id/status')
+  updateBoardStatus(
+    @Param('id') id: string,
+    @Body('status', BoardStatusValidationPipe) status: BoardStatus, // 추가
+  ) {
+    return this.boardsService.updateBoardStatus(id, status);
+  }
+  ```
+
+3. 포스트맨으로 요청 보내기
+
+- 현재 patch 방식으로 `http://localhost:3000/boards/c1fdfcd0-3d9a-11ee-9cc3-9f21d643b327(실제아이디값)/status` 경로에 body로 status 값을 담아 요청을 보내면 아래와 같은 결과가 출력된다.
+  ![Alt text](images/image-14.png)
+- 해당 값이 출력되면 아래와 같이 커스텀 파이프에서 찍었던 콘솔로그(value, metadata)도 정상적으로 출력됨을 확인할 수 있다.
+  ![Alt text](images/image-15.png)
+
+### 커스텀 파이프 실제 기능 구현
+
+- 게시물의 상태는 현재 PUBLIC과 PRIVATE만 올 수 있기 때문에 이외의 값이 오면 에러를 처리하여야 한다.
 
 ## 5. PostgreSQL & TypeORM
 
