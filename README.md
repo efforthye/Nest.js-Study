@@ -893,6 +893,16 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 <br/><br/>
 
+### TypeORM (Object Relational Mapping)
+
+- TypeORM은 node.js에서 실행되고 TypeScript로 작성된 객체 관계형 매핑 라이브러리이다.
+- MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, SAP Hana, WebSQL 등의 여러 데이터베이스를 지원한다.
+
+#### ORM (Object Relational Mapping) 이란?
+
+- 객체와 관계형 데이터베이스의 데이터를 자동으로 변형 및 연결하는 작업을 뜻한다.
+- ORM을 이용한 개발은 객체와 데이터베이스의 변형에 유연하게 사용할 수 있다는 장점이 있다.
+
 ## 6. JWT 모듈을 통한 인증 처리
 
 <br/><br/>
