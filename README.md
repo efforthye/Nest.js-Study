@@ -704,6 +704,28 @@ deleteBoard(@Param('id') id: string): void {
   ```
   ![Alt text](images/image-13.png)
 
+### 없는 게시물을 지우려 할 때의 결과 값 처리
+
+- 없는 아이디의 게시물을 가져오려고 할시 에러를 응답해 주었던 것처럼, 없는 게시물을 지우려 할 때에도 에러 값을 응답해 주면 된다.
+
+#### 구현 방법
+
+- 이미 있는 메서드인 getBoardById() 를 활용하여 지우려고 하는 게시물이 있는지 체크하여 주고, 게시물이 있다면 지워주고 없다면 에러 문구를 보내준다.
+  - 기존 delete board service
+    ```
+    deleteBoard(id: string): void {
+      this.boards = this.boards.filter((board) => board.id !== id);
+    }
+    ```
+  - 수정된 delete board service
+    ```
+    deleteBoard(id: string): void {
+      const found = this.getBoardById(id); // 추가
+      this.boards = this.boards.filter((board) => board.id !== found.id); // 찾은 게시물의 id로 수정
+    }
+    ```
+  - 위 코드와 같이 getBoardById 메서드를 추가만 해주어도 게시물이 있는지 해당 메서드에서 저절로 검사되기 때문에 만약 없는 게시물일 경우 알아서 에러가 응답되도록 할 수 있다.
+
 ## 5. PostgreSQL & TypeORM
 
 <br/><br/>
