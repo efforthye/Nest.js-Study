@@ -868,9 +868,10 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 ## 5. PostgreSQL & TypeORM
 
-### PostgresSQL 및 paAdmin(데이터베이스를 보는 프로그램) 설치 - Windows
+### PostgresSQL 및 pgAdmin(데이터베이스를 보는 프로그램) 설치 - Windows
 
-- PostgresSQL 설치 사이트 : https://www.postgresql.org/download/windows/
+- PostgresSQL 설치 사이트 : https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+- pgAdmin 설치 사이트 : https://www.pgadmin.org/download/
 
 <br/><br/>
 
