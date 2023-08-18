@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { v1 as uuid } from 'uuid'; // uuid 버전 1 사용
 import { Board, BoardStatus } from './board.model';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -16,7 +16,9 @@ export class BoardsService {
 
   // id로 특정 게시물 가져오기
   getBoardById(id: string): Board {
-    return this.boards.find((board) => board.id === id);
+    const found = this.boards.find((board) => board.id === id);
+    if (!found) throw new NotFoundException(`Can't find Board with id ${id}`);
+    return found;
   }
 
   // 게시글 생성 (제목, 내용)

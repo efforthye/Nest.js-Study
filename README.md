@@ -666,6 +666,44 @@ deleteBoard(@Param('id') id: string): void {
 - 파이프가 적용되었다면, `npm run start:dev` 를 통하여 서버를 열고, 포스트맨 으로 `http://localhost:3000/boards` 에 POST 방식의 api 요청을 보내 아래와 같이 에러가 정상적으로 출력되는지 확인하면 된다.
   ![Alt text](images/image-11.png)
 
+### 특정 게시물을 찾을 때 없는 경우 결과 값 처리
+
+- 특정 게시물을 ID로 가져올 때 만약 없는 아이디의 게시물을 가져오려고 한다면, 결과값으로 빈값이 출력되게 된다. 때문에 게시물이 없다면 없다는 내용을 클라이언트에 에러로서 응답해 주어야 한다. 이는 아래와 같이 예외 인스턴스를 생성하여 응답해주면 된다.
+- 예외 인스턴스 생성 및 응답 (service)
+
+  - 기존 코드
+
+  ```
+  getBoardById(id: string): Board {
+    return this.boards.find((board) => board.id === id);
+  }
+  ```
+
+  - 예외 인스턴스 추가 코드
+
+  ```
+  import { NotFoundException } from '@nestjs/common';
+
+  getBoardById(id: string): Board {
+    const found = this.boards.find((board) => board.id === id);
+    if (!found) throw new NotFoundException();
+    return found;
+  }
+  ```
+
+- 위와 같이 예외 처리 코드를 추가하고 나면, 빈 값으로 요청을 보내도 빈값이 출력되지 않고 아래와 같이 포맷이 잡힌 에러 문구가 출력되게 할 수 있다.
+  ![Alt text](images/image-12.png)
+
+- 만약 원하는 에러 메시지를 추가로 넣어 응답하고 싶다면, 아래와 같이 에러 메시지를 작성해 주면 된다.
+  ```
+  getBoardById(id: string): Board {
+    const found = this.boards.find((board) => board.id === id);
+    if (!found) throw new NotFoundException(`Can't find Board with id ${id}`);
+    return found;
+  }
+  ```
+  ![Alt text](images/image-13.png)
+
 ## 5. PostgreSQL & TypeORM
 
 <br/><br/>
