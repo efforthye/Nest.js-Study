@@ -873,7 +873,7 @@ export class BoardStatusValidationPipe implements PipeTransform {
 - PostgresSQL 설치 사이트 : https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 - pgAdmin 설치 사이트 : https://www.pgadmin.org/download/
 
-### 데이터베이스 생성 - pgAdmin
+### pgAdmin을 통한 데이터베이스 생성
 
 #### server 생성
 
