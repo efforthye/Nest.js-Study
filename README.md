@@ -814,7 +814,54 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 ### 커스텀 파이프 실제 기능 구현
 
-- 게시물의 상태는 현재 PUBLIC과 PRIVATE만 올 수 있기 때문에 이외의 값이 오면 에러를 처리하여야 한다.
+- 현재 게시물의 상태는 PUBLIC과 PRIVATE만 올 수 있기 때문에 이외의 값이 오면 에러를 출력하는 등의 처리를 해주어야 한다.
+
+#### readonly class property
+
+- 접두사(prefix)인 readonly는 속성을 읽기 전용으로 만드는 데 사용된다.
+- 읽기 전용 멤버는 클래스 외부에서 엑세스 할 수 있지만 해당 값은 변경할 수 없다는 특징이 있다.
+- pipe에 readonly 속성의 배열을 정의한 후 유효성을 검증하여 준다.
+
+  - 기존 코드
+
+  ```
+  import { ArgumentMetadata, PipeTransform } from '@nestjs/common';
+
+  export class BoardStatusValidationPipe implements PipeTransform {
+    transform(value: any, metadata: ArgumentMetadata) {
+      console.log({ value, metadata });
+      return value;
+    }
+  }
+  ```
+
+  - readonly 속성을 활용한 유효성 검증 코드
+
+  ```
+  import { ArgumentMetadata, PipeTransform, BadRequestException } from '@nestjs/common';
+  import { BoardStatus } from '../board.model';
+
+  export class BoardStatusValidationPipe implements PipeTransform {
+    readonly StatusOptions = [BoardStatus.PUBLIC, BoardStatus.PRIVATE];
+
+    transform(value: any) {
+      value = value.toUpperCase();
+
+      if (!this.isStatusValid(value))
+        throw new BadRequestException(`${value} is not in the status options.`);
+
+      return value;
+    }
+
+    private isStatusValid(status: any) {
+      const index = this.StatusOptions.indexOf(status);
+      return index !== -1;
+    }
+  }
+  ```
+
+- 이후 포스트맨으로 잘못된 값을 보낼 경우 아래와 같은 에러가 정상적으로 출력됨을 확인할 수 있다.
+  ![Alt text](images/image-16.png)
 
 ## 5. PostgreSQL & TypeORM
 
