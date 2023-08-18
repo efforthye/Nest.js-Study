@@ -868,10 +868,28 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 ## 5. PostgreSQL & TypeORM
 
-### PostgresSQL 및 pgAdmin(데이터베이스를 보는 프로그램) 설치 - Windows
+### PostgresSQL 및 pgAdmin(데이터베이스를 보는 프로그램) 설치
 
 - PostgresSQL 설치 사이트 : https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 - pgAdmin 설치 사이트 : https://www.pgadmin.org/download/
+
+### 데이터베이스 생성 - pgAdmin
+
+#### server 생성
+
+- general
+  ![Alt text](images/image-18.png)
+- connection
+  ![Alt text](images/image-19.png)
+  - save
+
+#### database 생성
+
+- general
+  ![Alt text](images/image-20.png)
+  - save
+- 이후 아래 이미지와 같이 데이터베이스가 정상적으로 생성된 것을 확인할 수 있다.
+  ![Alt text](images/image-21.png)
 
 <br/><br/>
 
