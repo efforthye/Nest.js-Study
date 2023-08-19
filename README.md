@@ -931,7 +931,37 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 #### TypeORM 애플리케이션 연결
 
-1.
+1. typeORM 설정 파일 생성
+
+- src/configs/typeorm.config.ts : configs 폴더를 생성한 후 해당 폴더에 typeorm.config.ts 파일을 생성한다.
+
+2. typeORM 설정 파일 작성
+
+- postgres database 설정 정보를 아래와 같이 지정해 준다.
+  ![Alt text](images/image-23.png)
+- `synchronize` : true 값을 주면 애플리케이션을 다시 실행할 때 테이블을 drop한 후 다시 생성해 준다. 이에 따라 production 모드에서는 false로 설정 해 주어 데이터를 잃지 않도록 지정해 주어야 한다.
+- entities : 나중에 생성할 엔티티를 하나씩 넣어줄 수도 있지만, 위처럼 작성하면 모든 엔티티를 다 포함하게 된다.
+  - 엔티티(entity) : 독립체라는 뜻으로, 데이터 모델링에서 사용되는 객체를 말한다.
+  - 하나씩 작성하려면 `entities : [User, Board]` 와 같은 형식으로 User 엔티티와 Board 엔티티를 사용할 수 있도록 지정할 수 있다.
+
+3. 루트 모듈에서 아래와 같이 typeORM config 파일을 import 해준다.
+
+- src/app.module.ts
+
+  ```
+  import { TypeOrmModule } from '@nestjs/typeorm';
+  import { typeORMConfig } from './configs/typeorm.config';
+
+  @Module({
+    imports: [
+      TypeOrmModule.forRoot(typeORMConfig), // 추가
+      BoardModule
+    ]
+  })
+  export class AppModule {}
+  ```
+
+  - 위와 같이 forRoot 안에 넣어준 설정(configuration)은 모든 부수적인 모듈(Sub-Module)들에 다 적용된다.
 
 ## 6. JWT 모듈을 통한 인증 처리
 
