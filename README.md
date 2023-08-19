@@ -1015,6 +1015,8 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 ## 6. 데이터베이스를 이용한 CRUD 구현
 
+<br/><br/>
+
 ## 7. JWT 모듈을 통한 인증 처리
 
 <br/><br/>
