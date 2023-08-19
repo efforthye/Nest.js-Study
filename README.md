@@ -1011,7 +1011,45 @@ export class BoardStatusValidationPipe implements PipeTransform {
 - Repository는 엔티티 개체와 함께 작동하며 엔티티 조회, 등록, 수정, 삭제 등을 처리하는 역할을 한다.
 - 관련 문서 : http://typeorm.delightful.studio/classes/_repository_repository_.repository.html
   - repository의 정의, method 정보(create, getId, clear, remove, ...) 등의 다양한 정보가 있다.
-    ![Alt text](images/image-24.png)
+
+![Alt text](images/image-24.png)
+
+- 위 그림과 같이 데이터베이스에 관련된 일(find, insert, delete 등)은 서비스가 아닌 Repository에서 해준다. 이것을 Repository Pattern 이라고도 부른다.
+
+#### Repository 생성
+
+1. src/boards/ 경로에 board.repository.ts 파일 생성
+2. 해당 파일에 repository를 위한 클래스 생성
+
+- 생성 시 Repository 클래스를 extends 해준다. 해당 클래스는 find, insert 등 엔티티를 컨트롤 해주는 역할을 수행한다.
+
+  ```
+  import { EntityRepository, Repository } from 'typeorm';
+  import { Board } from './board.entity';
+
+  @EntityRepository(Board)
+  export class BoardRepository extends Repository<Board> {
+
+  }
+  ```
+
+  - @EntityRepository() : 엔티티 레포지토리 데코레이터는 해당 클래스를 사용자 정의(커스텀) 저장소로 선언하는 데 사용된다. 커스텀 저장소는 일부 특정 엔티티를 관리하거나 일반 저장소로 사용할 수 있다.
+
+3. 생성한 Repository를 다른 곳에서 사용할 수 있도록 지정하기 위하여 모듈 에서도 import 해준다. (Injectable)
+
+- src/boards/board.module.ts
+
+  ```
+  import { TypeOrmModule } from '@nestjs/typeorm';
+  import { BoardRepository } from './board.repository';
+
+  @Module({
+    imports: [TypeOrmModule.forFeature([BoardRepository])], // 추가
+    controllers: [BoardsController],
+    providers: [BoardsService],
+  })
+  export class BoardsModule {}
+  ```
 
 ## 6. 데이터베이스를 이용한 CRUD 구현
 
