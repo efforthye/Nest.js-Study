@@ -10,11 +10,12 @@
 3. [기본 CRUD (로컬 메모리)](#3-기본-crud-방법-로컬-메모리)
 4. [Pipe 이용 방법](#4-pipe-이용)
 5. [PostgreSQL & TypeORM](#5-postgresql--typeorm)
-6. [JWT 모듈을 통한 인증 처리](#6-jwt-모듈을-통한-인증-처리)
-7. [JWT와 PASSPORT 모듈을 이용한 권한 처리](#7-jwt와-passport-모듈을-이용한-권한-처리)
-8. [어플리케이션 로그 남기기](#8-어플리케이션-로그-남기기)
-9. [AWS 등 클라우드 배포 시 설정](#9-aws-등-클라우드-배포-시-설정)
-   <br/><br/>
+6. [데이터베이스를 이용한 CRUD 구현](#6-데이터베이스를-이용한-crud-구현)
+7. [JWT 모듈을 통한 인증 처리](#7-jwt-모듈을-통한-인증-처리)
+8. [JWT와 PASSPORT 모듈을 이용한 권한 처리](#8-jwt와-passport-모듈을-이용한-권한-처리)
+9. [어플리케이션 로그 남기기](#9-어플리케이션-로그-남기기)
+10. [AWS 등 클라우드 배포 시 설정](#10-aws-등-클라우드-배포-시-설정)
+    <br/><br/>
 
 ## 1. Nest.js의 기본 개념
 
@@ -1012,18 +1013,20 @@ export class BoardStatusValidationPipe implements PipeTransform {
   - repository의 정의, method 정보(create, getId, clear, remove, ...) 등의 다양한 정보가 있다.
     ![Alt text](images/image-24.png)
 
-## 6. JWT 모듈을 통한 인증 처리
+## 6. 데이터베이스를 이용한 CRUD 구현
+
+## 7. JWT 모듈을 통한 인증 처리
 
 <br/><br/>
 
-## 7. JWT와 PASSPORT 모듈을 이용한 권한 처리
+## 8. JWT와 PASSPORT 모듈을 이용한 권한 처리
 
 <br/><br/>
 
-## 8. 어플리케이션 로그 남기기
+## 9. 어플리케이션 로그 남기기
 
 <br/><br/>
 
-## 9. AWS 등 클라우드 배포 시 설정
+## 10. AWS 등 클라우드 배포 시 설정
 
 <br/><br/>
