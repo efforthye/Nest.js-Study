@@ -1002,7 +1002,15 @@ export class BoardStatusValidationPipe implements PipeTransform {
   - @Entity() : `CREATE TABLE board` 부분으로, Board 클래스가 엔티티임을 나타내는 데 사용된다.
   - @PrimaryGeneratedColumn() : id 열이 Board 엔티티의 기본 키 열임을 나타내는 데 사용된다.
   - @Column() : Board 엔티티의 title 및 description과 같은 다른 열을 나타내는 데 사용된다.
-  -
+
+### Entity의 Repository 생성 방법
+
+#### Repository 란?
+
+- Repository는 엔티티 개체와 함께 작동하며 엔티티 조회, 등록, 수정, 삭제 등을 처리하는 역할을 한다.
+- 관련 문서 : http://typeorm.delightful.studio/classes/_repository_repository_.repository.html
+  - repository의 정의, method 정보(create, getId, clear, remove, ...) 등의 다양한 정보가 있다.
+    ![Alt text](images/image-24.png)
 
 ## 6. JWT 모듈을 통한 인증 처리
 
