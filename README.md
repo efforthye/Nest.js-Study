@@ -893,7 +893,7 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 <br/><br/>
 
-### TypeORM (Object Relational Mapping)
+### TypeORM(Object Relational Mapping)의 정의
 
 - TypeORM은 node.js에서 실행되고 TypeScript로 작성된 객체 관계형 매핑 라이브러리이다.
 - MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, SAP Hana, WebSQL 등의 여러 데이터베이스를 지원한다.
@@ -918,6 +918,20 @@ export class BoardStatusValidationPipe implements PipeTransform {
     - TypeORM은 모델을 기반으로 데이터베이스 테이블 체계를 자동으로 생성하며, 테이블 간의 매핑(일대일, 일대다, 다대다)을 만들 수 있다.
     - 조회, 삽입, 수정, 삭제 등 데이터를 쉽게 관리할 수 있으며 간단한 CLI 명령을 제공한다.
     - TypeORM은 간단한 코딩으로 ORM 프레임워크를 사용하기 쉬우며 다른 모듈과도 쉽게 통합된다는 장점이 있다.
+
+### 애플리케이션에서 TypeORM 이용하기
+
+#### TypeORM을 사용하기 위한 모듈 설치
+
+- 설치 명령어 : `npm install @nestjs/typeorm pg typeorm --save`
+  - @nestjs/typeorm : Nest JS에서 TypeORM을 사용하기 위한 모듈
+  - pg : Postgres 관련 모듈
+  - typeorm : TypeORM 관련 모듈
+- TypeORM 데이터베이스 컨트롤 관련 문서 : https://docs.nestjs.com/techniques/database
+
+#### TypeORM 애플리케이션 연결
+
+1.
 
 ## 6. JWT 모듈을 통한 인증 처리
 
