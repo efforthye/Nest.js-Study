@@ -1053,6 +1053,19 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 ## 6. 데이터베이스를 이용한 CRUD 구현
 
+### 데이터베이스 연동 전 수정 할 부분
+
+- service, controller 부분 주석 처리
+- service의 board 배열 주석 처리
+- board model의 board interface 주석 처리
+- status enum 을 위한 파일 생성
+  - board.model.ts -> board-status.enum.ts 생성
+- 불필요한 경로 제거
+  - board-status-validation.pipe.ts BoardStatus
+  - boards.controller.ts
+  - board.entity.ts BoardStatus
+  - uuid
+
 <br/><br/>
 
 ## 7. JWT 모듈을 통한 인증 처리
