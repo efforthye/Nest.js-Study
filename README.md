@@ -902,6 +902,22 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 - 객체와 관계형 데이터베이스의 데이터를 자동으로 변형 및 연결하는 작업을 뜻한다.
 - ORM을 이용한 개발은 객체와 데이터베이스의 변형에 유연하게 사용할 수 있다는 장점이 있다.
+  ![Alt text](images/image-22.png)
+- TypeORM vs Pure JavaScript
+  - Pure JavaScript
+    ```
+    db.query('SELECT \* FROM boards WHERE title = "Hello" AND status = "PUBLIC"', (err, result) => {
+      if(err) throw new Error('Error');
+      boards = result.rows;
+    })
+    ```
+  - TypeORM
+    ```
+    const boards = Board.find({title : "Hello", status : "PUBLIC"});
+    ```
+    - TypeORM은 모델을 기반으로 데이터베이스 테이블 체계를 자동으로 생성하며, 테이블 간의 매핑(일대일, 일대다, 다대다)을 만들 수 있다.
+    - 조회, 삽입, 수정, 삭제 등 데이터를 쉽게 관리할 수 있으며 간단한 CLI 명령을 제공한다.
+    - TypeORM은 간단한 코딩으로 ORM 프레임워크를 사용하기 쉬우며 다른 모듈과도 쉽게 통합된다는 장점이 있다.
 
 ## 6. JWT 모듈을 통한 인증 처리
 
