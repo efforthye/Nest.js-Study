@@ -963,6 +963,47 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
   - 위와 같이 forRoot 안에 넣어준 설정(configuration)은 모든 부수적인 모듈(Sub-Module)들에 다 적용된다.
 
+### 게시물을 위한 엔티티(Entity) 생성하기
+
+#### 엔티티를 생성해야 하는 이유
+
+- 원래 ORM 없이 데이터베이스에 테이블을 생성하려면 아래와 같이 테이블을 생성해 주어야 한다.
+  ```
+  CREATE TABLE board (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL
+  )
+  ```
+- 하지만 TypeORM을 사용할 때는 데이터베이스 테이블로 변환되는 클래스가 존재하기 때문에 위처럼 구현하지 않고, 아래와 같이 클래스를 생성한 후 그 안에 컬럼들을 정의하여 엔티티를 생성해 준다.
+
+  ```
+  // src/boards/board.entity.ts
+  import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+  import { BoardStatus } from './boards.model';
+
+  @Entity()
+  export class Board extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
+    title: string;
+
+    @Column()
+    description: string;
+
+    @Column()
+    status: BoardStatus;
+  }
+  ```
+
+- 클래스 데코레이터 설명
+  - @Entity() : `CREATE TABLE board` 부분으로, Board 클래스가 엔티티임을 나타내는 데 사용된다.
+  - @PrimaryGeneratedColumn() : id 열이 Board 엔티티의 기본 키 열임을 나타내는 데 사용된다.
+  - @Column() : Board 엔티티의 title 및 description과 같은 다른 열을 나타내는 데 사용된다.
+  -
+
 ## 6. JWT 모듈을 통한 인증 처리
 
 <br/><br/>
