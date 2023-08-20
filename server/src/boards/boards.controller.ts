@@ -8,6 +8,7 @@ import {
   Post,
   ValidationPipe,
   UsePipes,
+  NotFoundException,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 
@@ -16,10 +17,17 @@ import { BoardStatus } from './board-status.enum';
 
 import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
+import { Board } from './board.entity';
 
 @Controller('boards')
 export class BoardsController {
-  // constructor(private boardsService: BoardsService) {}
+  constructor(private boardsService: BoardsService) {}
+
+  @Get('/:id')
+  getBoardById(@Param('id') id: number): Promise<Board> {
+    return this.boardsService.getBoardById(id);
+  }
+
   // @Get() // @Get('.') 와 같다.
   // // 메서드의 리턴 타입을 board 모델 배열로 정의
   // getAllBoard(): Board[] {

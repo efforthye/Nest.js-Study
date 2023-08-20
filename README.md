@@ -1072,6 +1072,54 @@ export class BoardStatusValidationPipe implements PipeTransform {
   - board.entity.ts BoardStatus
   - uuid
 
+### ID를 이용해서 특정 게시물 가져오기
+
+- 로컬 메모리가 아닌 PostgreSQL 데이터베이스에서 데이터를 가져오기 위하여 TypeORM 및 Repository 패턴을 사용하기로 하였다.
+- src/boards/board.repository.ts에 생성된 BoardRepository를 src/boards/board.service.ts의 BoardsService에서 사용할 수 있도록 아래와 같이 생성자에 Repository를 정의하여 준다.
+  ```
+  export class BoardsService {
+    // 추가
+    constructor(
+      @InjectRepository(BoardRepository)
+      private boardRepository: BoardRepository,
+    ) {}
+  }
+  ```
+  - @InjectRepository(BoardRepository를) : 해당 서비스에서 BoardRepository를 이용한다는 것을 지정한다.
+- 이후 BoardsService에 getBoardById라는 메서드를 추가로 생성하여 아래와 같이 사용해 주면 된다.
+
+  ```
+  import { Board } from './board.entity';
+
+  @Controller('boards')
+  export class BoardsController {
+    // 추가
+    async getBoardById(id: number): Promise <Board> {
+      const found = await this.boardRepository.findOne(id);
+      if(!found) throw new NotFoundException(`Can not find Board with id ${id}`);
+      return found;
+    }
+  }
+  ```
+
+  - typeORM에서 제공하는 findOne 메서드를 사용하였다.
+  - async await를 이용하여 데이터베이스 작업이 끝난 후 결과값을 받을 수 있게 해주었다.
+
+- 이후 Controller(src/boards/boards.controler.ts)에서 아래와 같이 핸들러를 정의하여 준다.
+
+  ```
+  @Controller('boards')
+  export class BoardsController {
+    constructor(private boardsService: BoardsService) {}
+
+    // 추가
+    @Get('/:id')
+    getBoardById(@Param('id') id: number) : Promise<Board> {
+      return this.boardsService.getBoardById(id);
+    }
+  }
+  ```
+
 <br/><br/>
 
 ## 7. JWT 모듈을 통한 인증 처리
