@@ -1056,11 +1056,17 @@ export class BoardStatusValidationPipe implements PipeTransform {
 ### 데이터베이스 연동 전 수정 할 부분
 
 - service, controller 부분 주석 처리
-- service의 board 배열 주석 처리
-- board model의 board interface 주석 처리
-- status enum 을 위한 파일 생성
-  - board.model.ts -> board-status.enum.ts 생성
-- 불필요한 경로 제거
+
+  - src/boards/boards.service.ts의 BoardsService class 내부 전체 주석 처리
+    - service의 board 배열 삭제
+  - src/boards/boards.service.ts의 BoardsController class 내부 전체 주석 처리
+
+- board model의 board interface 부분 주석 처리 : model이 아닌 entity를 사용할 것이기 때문
+
+  - src/boards/board.model.ts의 Board interface 전체 주석 처리
+  - model은 지우고 BoardStatus enum은 계속 사용할 예정이므로 해당 파일 명을 src/boards/board-status.enum.ts로 변경하여 준다.
+
+- 그 외 불필요한 import 제거
   - board-status-validation.pipe.ts BoardStatus
   - boards.controller.ts
   - board.entity.ts BoardStatus

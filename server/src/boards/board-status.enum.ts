@@ -11,12 +11,12 @@
 
 // 1. board 모델의 구조 정의 방법 - 인터페이스
 // -> 이후 service 부분에서 보드에 대한 정보와 데이터 형식을 정의해 준다.
-export interface Board {
-  id: string;
-  title: string;
-  description: string;
-  status: BoardStatus; // 공개, 비공개 상태
-}
+// export interface Board {
+//   id: string;
+//   title: string;
+//   description: string;
+//   status: BoardStatus; // 공개, 비공개 상태
+// }
 
 // 1-2. 게시글 공개, 비공개 정의
 export enum BoardStatus {
