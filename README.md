@@ -1120,6 +1120,35 @@ export class BoardStatusValidationPipe implements PipeTransform {
   }
   ```
 
+### 게시물 생성
+
+- BoardsService 서비스에 createBoard 메서드를 추가하여 준다.
+
+  ```
+  async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+    const { title, description } = createBoardDto;
+
+    const board = this.boardRepository.create({
+      title,
+      description,
+      status: BoardStatus.PUBLIC,
+    });
+
+    return board;
+  }
+  ```
+
+- BoardsController 컨트롤러에 post 방식의 createBoard 핸들러를 정의해 준다.
+  ```
+  @Post()
+  @UsePipes(ValidationPipe)
+  createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardsService.createBoard(createBoardDto);
+  }
+  ```
+- 위와 같이 코드를 작성해 주었으나 `TypeORM 버전에 따른 오류` 가 생겨 아래 블로그를 참고하여 코드를 수정해 주었다. 이후 `포스트맨 요청` 을 보냈을 때, 데이터베이스에 게시글이 정상 생성됨을 확인할 수 있었다.
+  - 참고 블로그 : https://velog.io/@ansunny1170/No-metadata-for-BoardRepository-was-found#%EB%91%90-%EB%B2%88%EC%A7%B8-%EB%B0%A9%EB%B2%95
+
 <br/><br/>
 
 ## 7. JWT 모듈을 통한 인증 처리

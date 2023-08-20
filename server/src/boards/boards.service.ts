@@ -9,15 +9,18 @@ import { Board } from './board.entity';
 
 @Injectable()
 export class BoardsService {
-  constructor(
-    @InjectRepository(BoardRepository) private boardRepository: BoardRepository,
-  ) {}
+  constructor(private boardRepository: BoardRepository) {}
 
   async getBoardById(id: number): Promise<Board> {
-    const found = await this.boardRepository.findOneById(id); // findOne(id);
+    // const found = await this.boardRepository.findOne(id);
+    const found = await this.boardRepository.findOneById(id);
 
     if (!found) throw new NotFoundException(`Can not find Board with id ${id}`);
     return found;
+  }
+
+  async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardRepository.createBoard(createBoardDto);
   }
 
   // // boards라는 배열 변수의 타입으로 board 모델 배열 정의

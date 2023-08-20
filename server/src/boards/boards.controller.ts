@@ -28,6 +28,12 @@ export class BoardsController {
     return this.boardsService.getBoardById(id);
   }
 
+  @Post()
+  @UsePipes(ValidationPipe)
+  createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardsService.createBoard(createBoardDto);
+  }
+
   // @Get() // @Get('.') 와 같다.
   // // 메서드의 리턴 타입을 board 모델 배열로 정의
   // getAllBoard(): Board[] {
