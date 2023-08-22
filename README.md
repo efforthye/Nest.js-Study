@@ -1150,6 +1150,7 @@ export class BoardStatusValidationPipe implements PipeTransform {
   - 참고 블로그 : https://velog.io/@ansunny1170/No-metadata-for-BoardRepository-was-found#%EB%91%90-%EB%B2%88%EC%A7%B8-%EB%B0%A9%EB%B2%95
   - pgAdmin 에서 board Table을 확인해 보면, 아래 이미지와 같이 해당 데이터가 정상적으로 입력된 것을 확인할 수 있다.
     ![Alt text](images/image-25.png)
+- 레포지토리 패턴 : 서비스에 있는 데이터베이스를 Repository 쪽으로 모아주는 것을 뜻한다.
 
 <br/><br/>
 
