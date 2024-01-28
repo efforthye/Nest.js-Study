@@ -1154,6 +1154,7 @@ export class BoardStatusValidationPipe implements PipeTransform {
 
 <br/><br/>
 
+<!--
 ## 7. JWT 모듈을 통한 인증 처리
 
 <br/><br/>
@@ -1169,3 +1170,4 @@ export class BoardStatusValidationPipe implements PipeTransform {
 ## 10. AWS 등 클라우드 배포 시 설정
 
 <br/><br/>
+-->
